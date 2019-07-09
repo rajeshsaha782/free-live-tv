@@ -1,12 +1,54 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
-
-<p style="text-align: center; font-size: 30px; background-color: aliceblue" [ngStyle]="{'color': fcolor}"> <b>FREE LIVE TV</b>  </p>
-<div style="text-align: center; overflow: hidden;">
-  <iframe [src]="channel" width="1020" height="730" frameborder="0" id="tvIframe" allowtransparency="true" scrolling="no"
-  allowfullscreen="yes" style="margin-top:-160px"></iframe>
+<!-- header start -->
+<div class="row">
+  <div class="col-md-12">
+    <p style="text-align: center;font-size: 30px; background-color: aliceblue" [ngStyle]="{'color': fcolor}">
+      <b>FREE LIVE TV BY RAJESH</b>
+    </p>
+  </div>
 </div>
+<!-- header end -->
 
+<!-- video body -->
+<div style="text-align: center;margin: 0 auto;" *ngIf="isLoading">
+  <img style="background-color: whitesmoke" src="assets\Double Ring-1s-200px (1).gif">
+</div>
+<div *ngIf="this.current_channel['url']">
+  <p style="text-align: center; background-color: whitesmoke;font-size: 25px">
+    <b>{{current_channel['name']}}</b>
+  </p>
+  <div class="row">
+    <div style="text-align: center; overflow: hidden;margin: 0 auto;"
+      [ngStyle]="{'width': current_channel['div_width'],'height': current_channel['div_height'] }">
+      <iframe [src]="current_channel['url']" (load)="load()" width="1020" height="730" frameborder="0" id="tvIframe"
+        allowtransparency="true" scrolling="no" allowfullscreen="yes"
+        [ngStyle]="{'margin-top': current_channel['iframe-margin-top']}"></iframe>
+    </div>
+  </div>
+</div>
+<!-- videp body end -->
 
+<!-- channel list -->
+<p style="background-color: aliceblue;font-size: 25px">
+  <b>Chanel List</b>
+</p>
+
+<div class="container">
+  <div class="row">
+    <ng-template ngFor let-channel [ngForOf]="channel_list">
+      <div class="col-lg-3 ">
+        <a style="cursor: pointer;" (click)="change_channel(channel)">
+          <img src="{{channel.logo}}" width="200" height="140" style="background-color: white">
+          <!-- <p style="color: white">{{channel.name}}</p> -->
+          <h4 class="pt-cv-title"><a style="color: white">{{channel.name}}</a></h4>
+        </a>
+      </div>
+    </ng-template>
+  </div>
+  <img src="assets\new.jpg" height="400" width="400">
+  <hr>
+</div>
+<!-- channel list end -->
 
 <router-outlet></router-outlet>
