@@ -21,7 +21,7 @@
   <div class="row">
     <div style="text-align: center; overflow: hidden;margin: 0 auto;"
       [ngStyle]="{'width': current_channel['div_width'],'height': current_channel['div_height'] }">
-      <iframe [src]="current_channel['url']" (load)="load()" width="1020" height="730" frameborder="0" id="tvIframe"
+      <iframe [src]="current_channel['url']" width="1020" height="730" frameborder="0" id="tvIframe"
         allowtransparency="true" scrolling="no" allowfullscreen="yes"
         [ngStyle]="{'margin-top': current_channel['iframe-margin-top']}"></iframe>
     </div>
@@ -40,15 +40,14 @@
       <div class="col-lg-3 ">
         <a style="cursor: pointer;" (click)="change_channel(channel)">
           <img src="{{channel.logo}}" width="200" height="140" style="background-color: white">
-          <!-- <p style="color: white">{{channel.name}}</p> -->
-          <h4 class="pt-cv-title"><a style="color: white">{{channel.name}}</a></h4>
+          <h4 class="pt-cv-title"><a style="color: white">{{channel.name}} </a>
+            <img *ngIf="current_channel['name']==channel.name" src="assets\selected.svg" height="20" width="20">
+          </h4>
         </a>
       </div>
     </ng-template>
   </div>
-  <img src="assets\new.jpg" height="400" width="400">
   <hr>
 </div>
 <!-- channel list end -->
-
 <router-outlet></router-outlet>

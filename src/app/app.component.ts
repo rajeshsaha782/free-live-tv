@@ -19,25 +19,20 @@ export class AppComponent {
   ngOnInit() {
     this.current_channel_id = 1;
     this.channel_list = this._dataService.getAllChannelList();
-    // console.log(Object.keys(this.current_channel).length);
-    // console.log(this.current_channel['url'])
 
-    // let current = this._dataService.getChannelById(this.current_channel_id);
+    let current:any = this._dataService.getChannelById(this.current_channel_id);
+
+    this.current_channel['url'] = this.sanitizer.bypassSecurityTrustResourceUrl(current.url);
+    this.current_channel['name'] = current.name;
+    this.current_channel['div_width'] = current.div_width;
+    this.current_channel['div_height'] = current.div_height;
+    this.current_channel['iframe-margin-top'] = current.iframe_margin_top;
+
     // this.current_channel['url'] = this.sanitizer.bypassSecurityTrustResourceUrl("http://freeiptv.ga/tv2.php?channel=0-9-zeebangla");
     // this.current_channel['name'] = 'Zee';
     // this.current_channel['div_width'] = '1060px';
     // this.current_channel['iframe-margin-top'] = '-150px';
      
-
-    // this.channel['url'] =  this.sanitizer.bypassSecurityTrustResourceUrl("http://www.jagobd.com/jamunatv");      
-    // this.channel['width'] = '660px';
-    // this.channel['iframe-margin-top'] = '-100px';
-
-    // this.channel['url'] =  this.sanitizer.bypassSecurityTrustResourceUrl("http://www.jagobd.com/atn-bangla");      
-    // this.channel['width'] = '660px';
-    // this.channel['iframe-margin-top'] = '-100px';
-
-    // console.log(this.channel)
     this.toggleColor();
   }
 
@@ -50,11 +45,15 @@ export class AppComponent {
  
     if(current.url != ongoing){
       this.isLoading = true;
-      this.current_channel['div_width'] = '0px';
-      this.current_channel['div_height'] = '0px';
+      // this.current_channel['div_width'] = '0px';
+      // this.current_channel['div_height'] = '0px';
       this.current_channel_id = current.id;
       this.current_channel['url'] = this.sanitizer.bypassSecurityTrustResourceUrl(current.url);
       this.current_channel['name'] = current.name;
+      this.current_channel['div_width'] = current.div_width;
+      this.current_channel['div_height'] = current.div_height;
+      this.current_channel['iframe-margin-top'] = current.iframe_margin_top;
+      this.isLoading = false;
     }
 
     // console.log(this.current_channel)
